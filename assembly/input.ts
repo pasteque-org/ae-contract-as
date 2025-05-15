@@ -4,8 +4,8 @@ import { input_size, load_u8 } from "./env";
 import { Balance } from "./lib/chain";
 import { Address } from "./utils";
 
-interface Object {}
-export interface NoArgs extends Object {}
+interface Object { }
+export interface NoArgs extends Object { }
 
 @json
 export class Context<T> {
@@ -39,6 +39,13 @@ export class ContextWithTransactionAndParams<
   X
 > extends ContextWithTransaction<T> {
   arguments!: X;
+}
+
+@json
+export class ContextWithInherit<T> extends Context<T> {
+  nextBalance!: Balance;
+  nextState: T;
+  nextTransaction!: Transaction;
 }
 
 export function getContext<T>(): T {
